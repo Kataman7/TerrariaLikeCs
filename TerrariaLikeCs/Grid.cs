@@ -1,4 +1,6 @@
-﻿namespace TerrariaLikeCs
+﻿using Raylib_CsLo;
+
+namespace TerrariaLikeCs
 
 {
     public class Grid
@@ -88,5 +90,31 @@
                 }
             }
         }
+
+        public void drawByInfiniteMode(Player player)
+        {
+
+            float blockX = player.hitBox.x / blockSize;
+            float blockY = player.hitBox.y / blockSize;
+
+            int screenW = (Raylib.GetScreenWidth() / 2) / blockSize;
+            int screenH =( Raylib.GetScreenHeight() / 2) / blockSize;
+
+            for (int i = (int)blockY - screenH; i < blockY + screenH; ++i)
+            {
+                for (int j = (int)blockX - screenW; j < blockX + screenW; ++j)
+                {
+                    if (getCell(j, i) != 0)
+                    {
+                        int cellValue = getCell(j, i);
+                        if (cellValue != 0)
+                        {
+                            Blocks.list[getCell(j, i)].draw(j, i, blockSize);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
