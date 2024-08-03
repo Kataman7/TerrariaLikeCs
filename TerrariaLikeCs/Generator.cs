@@ -107,10 +107,18 @@
             int[] altitude = new int[width];
 
             double x = random.NextDouble();
+            //double a = random.NextDouble();
 
             for (int i = 0; i < width; i++)
             {
-                altitude[i] = (int)(Math.Cos(x) * height) + bias;
+                /*
+                if (i % 5 == 0)
+                {
+                    a = a + 0.2 * new int[] { -1, 1 }[random.Next(0, 2)];
+                }
+                */
+
+                altitude[i] = (int)((Math.Sin(x) /* *a */ * height) ) + bias;
                 x += drop;
             }
 

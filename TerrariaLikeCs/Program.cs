@@ -7,30 +7,13 @@ namespace TerrariaLikeCs
         public static async Task Main(string[] args)
         {
             Raylib.InitWindow(1280, 720, "TerrariaLike");
-            Raylib.SetTargetFPS(60);
 
-            World word = new World(100, 50, 40);
-            word.create();
-
-            Player e = new Player(5, 5, word);
-
-            Camera cam = new Camera(e, 10, 1f, true);
+            Scene scene = new BasicScene();
 
             while (!Raylib.WindowShouldClose())
             {
-                Raylib.BeginDrawing();
-                Raylib.ClearBackground(Raylib.RAYWHITE);
-                Raylib.BeginMode2D(cam.camera);
-
-                e.update();
-                cam.update();
-
-                word.grid.drawInfiniteMode(cam.camera);
-                Raylib.DrawRectangleRec(e.hitBox, Raylib.BLACK);
-
-                Raylib.EndMode2D();
-                Raylib.DrawFPS(10, 10);
-                Raylib.EndDrawing();
+                scene.update();
+                scene.draw();
             }
             Raylib.CloseWindow();
             Blocks.unloadTexture();

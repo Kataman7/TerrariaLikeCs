@@ -108,8 +108,7 @@ namespace TerrariaLikeCs
                 {
                     if (getCell(j, i) != 0)
                     {
-                        int cellValue = getCell(j, i);
-                        if (cellValue != 0)
+                        if (getCell(j, i) != 0)
                         {
                             Blocks.list[getCell(j, i)].draw(j, i, blockSize);
                         }

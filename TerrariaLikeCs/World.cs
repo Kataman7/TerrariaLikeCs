@@ -22,33 +22,34 @@ namespace TerrariaLikeCs
 
         public void create()
         {
-            altitudeGeneration();
+            landGeneration();
             caveGeneration();
         }
 
-        private void altitudeGeneration()
+        private void landGeneration()
         {
-            int[] altitude = Generator.altitudeGeneration(grid.width, 5, 0.3f, 10);
+            int[] altitude = Generator.altitudeGeneration(grid.width, 5, 0.16f, 50);
 
-            for (int i = 0; i < grid.height; i++)
+            for (int i = 0; i < grid.width; i++)
             {
-                for (int j = 0; j < grid.width; j++)
+                for (int j = 0; j < grid.height; j++)
                 {
-                    if (i == altitude[j])
+                    if (j == altitude[i])
                     {
-                        grid.setCell(j, i, Blocks.DIRT_GRASS.id);
+                        grid.setCell(i, j, Blocks.DIRT_GRASS.id);
+
                     }
-                    else if (i > altitude[j] && i < altitude[j] + 3)
+                    else if (j > altitude[i] && j < altitude[i] + 3)
                     {
-                        grid.setCell(j, i, Blocks.DIRT.id);
+                        grid.setCell(i, j, Blocks.DIRT.id);
                     }
-                    else if (i >= altitude[j] + 3 && i < altitude[j] + 6)
+                    else if (j >= altitude[i] + 3 && j < altitude[i] + 6)
                     {
-                        grid.setCell(j, i, Blocks.STONE.id);
+                        grid.setCell(i, j, Blocks.STONE.id);
                     }
-                    else if (i >= altitude[j] + 6)
+                    else if (j >= altitude[i] + 6)
                     {
-                        Generator.randomCellGeneration(grid, j, i, 0.5f, Blocks.STONE.id, 0, -1);
+                        Generator.randomCellGeneration(grid, i, j, 0.45f, Blocks.STONE.id, 0, -1);
                     }
                 }
             }
@@ -61,7 +62,5 @@ namespace TerrariaLikeCs
                 Generator.nextCaveGeneration(grid, Blocks.STONE.id, 0);
             }
         }
-
-
     }
 }

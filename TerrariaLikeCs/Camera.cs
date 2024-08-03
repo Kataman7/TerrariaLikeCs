@@ -35,21 +35,23 @@ namespace TerrariaLikeCs
             }
             else
             {
+                float deltaTime = Raylib.GetFrameTime();
+
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
                 {
-                    camera.target.X -= speed;
+                    camera.target.X -= speed * deltaTime;
                 }
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
                 {
-                    camera.target.X += speed;
+                    camera.target.X += speed * deltaTime;
                 }
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
                 {
-                    camera.target.Y -= speed;
+                    camera.target.Y -= speed * deltaTime;
                 }
                 if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
                 {
-                    camera.target.Y += speed;
+                    camera.target.Y += speed * deltaTime;
                 }
             }
         }
