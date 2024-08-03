@@ -25,7 +25,7 @@ namespace TerrariaLikeCs
                 e.update();
                 cam.update();
 
-                word.grid.drawByInfiniteMode(e);
+                word.grid.drawInfiniteMode(cam.camera);
                 Raylib.DrawRectangleRec(e.hitBox, Raylib.BLACK);
 
                 Raylib.EndMode2D();

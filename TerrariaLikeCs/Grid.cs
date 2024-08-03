@@ -91,18 +91,20 @@ namespace TerrariaLikeCs
             }
         }
 
-        public void drawByInfiniteMode(Player player)
+        public void drawInfiniteMode(Camera2D camera)
         {
+            int halfScreenW = Raylib.GetScreenWidth() / 2;
+            int halfScreenH = Raylib.GetScreenHeight() / 2;
 
-            float blockX = player.hitBox.x / blockSize;
-            float blockY = player.hitBox.y / blockSize;
+            int width = halfScreenW / blockSize + 2;
+            int height = halfScreenH / blockSize + 2;
 
-            int screenW = (Raylib.GetScreenWidth() / 2) / blockSize;
-            int screenH =( Raylib.GetScreenHeight() / 2) / blockSize;
+            float blockX = (camera.target.X + halfScreenW) / blockSize;
+            float blockY = (camera.target.Y + halfScreenH) / blockSize;
 
-            for (int i = (int)blockY - screenH; i < blockY + screenH; ++i)
+            for (int i = (int)blockY - height; i < blockY + height; ++i)
             {
-                for (int j = (int)blockX - screenW; j < blockX + screenW; ++j)
+                for (int j = (int)blockX - width; j < blockX + width; ++j)
                 {
                     if (getCell(j, i) != 0)
                     {
