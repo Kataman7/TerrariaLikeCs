@@ -8,16 +8,19 @@ namespace TerrariaLikeCs
 {
     public class World
     {
-        public Grid grid { get; }
+        public GridInt grid;
+        public List<DynamicEntity> entities;
 
         public World(int width, int height, int blockSize)
         {
-            this.grid = new Grid(width, height, blockSize);
+            this.grid = new GridInt(width, height, blockSize);
+            entities = new List<DynamicEntity>();
         }
 
-        public World(Grid grid)
+        public World(GridInt grid)
         {
             this.grid = grid;
+            entities = new List<DynamicEntity>();
         }
 
         public void create()
@@ -26,9 +29,34 @@ namespace TerrariaLikeCs
             caveGeneration();
         }
 
+        public void draw(Camera camera)
+        {
+            grid.drawInfiniteMode(camera.camera);
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].alive)
+                {
+                    entities[i].draw();
+                }
+                else
+                {
+                    entities.Remove(entities[i]);
+                    i--;
+                }
+            }
+        }
+
+        public void update()
+        {
+            foreach (var entity in entities)
+            {
+                entity.update();
+            }
+        }
+
         private void landGeneration()
         {
-            int[] altitude = Generator.altitudeGeneration(grid.width, 5, 0.16f, 50);
+            int[] altitude = Generator.altitudeGeneration(grid.width, 5, 0.16f, 100);
 
             for (int i = 0; i < grid.width; i++)
             {

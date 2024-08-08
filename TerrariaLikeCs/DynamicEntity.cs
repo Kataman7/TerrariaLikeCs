@@ -9,6 +9,7 @@ namespace TerrariaLikeCs
         protected int range;
         protected float weight;
         protected World world;
+        public bool alive;
 
         public DynamicEntity(int x, int y, float width, float height, int range, float weight, World world) : base (x, y, width, height, world.grid.blockSize)
         {
@@ -16,6 +17,7 @@ namespace TerrariaLikeCs
             this.range = range;
             this.weight = weight;
             this.world = world;
+            alive = true;
         }
 
         override public void update()
@@ -23,8 +25,8 @@ namespace TerrariaLikeCs
             float previousX = hitBox.x;
             float previousY = hitBox.y;
 
-            velY += weight;
-            hitBox.y += velY;
+            velY += weight * Raylib.GetFrameTime();
+            hitBox.y += velY * Raylib.GetFrameTime();
 
             if (checkStateCollision() == States.SOLID)
             {

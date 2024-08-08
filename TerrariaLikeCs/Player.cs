@@ -1,4 +1,5 @@
 ﻿using Raylib_CsLo;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace TerrariaLikeCs
@@ -29,7 +30,7 @@ namespace TerrariaLikeCs
                 jumpCount++;
             }
         }
-        private void control()
+        private void control(Camera cam, Cursor cursor)
         {
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
@@ -43,8 +44,22 @@ namespace TerrariaLikeCs
             {
                 moove(-1);
             }
+            if (Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT))
+            {
+                
+                Vector2 pos = cursor.getGridPos();
+                int posX = (int) Math.Floor(pos.X);
+                int posY = (int)Math.Floor(pos.Y);
+
+                int blockID = world.grid.getCell(posX, posY);
+
+                if (blockID != 0)
+                {
+                    Blocks.list[blockID].destroy(posX, posY, world, cam);
+                }
+            }
         }
-        override public void update()
+        public void update(Camera cam, Cursor cursor)
         {
             float previousX = hitBox.x;
             float previousY = hitBox.y;
@@ -62,13 +77,14 @@ namespace TerrariaLikeCs
                 hitBox.y = previousY;
             }
 
-            control();
+            control(cam, cursor);
 
             if (checkStateCollision() == States.SOLID)
             {
                 hitBox.x = previousX;
             }
-
         }
+
+        
     }
 }

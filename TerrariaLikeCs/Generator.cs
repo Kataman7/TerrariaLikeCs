@@ -23,7 +23,7 @@
 
         public static Random random = new Random();
 
-        public static void randomCellGeneration(Grid grid, int x, int y, float chanceToLive, int livingValue, int deadValue, int conditionValue)
+        public static void randomCellGeneration(GridInt grid, int x, int y, float chanceToLive, int livingValue, int deadValue, int conditionValue)
         {
             if (conditionValue == -1 || grid.getCell(x, y) == conditionValue)
             {
@@ -38,7 +38,7 @@
             }
         }
 
-        public static void randomGridGeneration(Grid grid, float chanceToLive, int livingValue, int deadValue, int conditionValue)
+        public static void randomGridGeneration(GridInt grid, float chanceToLive, int livingValue, int deadValue, int conditionValue)
         {
 
             for (int i = 0; i < grid.height; i++)
@@ -54,9 +54,9 @@
             }
         }
 
-        public static void nextCaveGeneration(Grid grid, int livingValue, int deadValue)
+        public static void nextCaveGeneration(GridInt grid, int livingValue, int deadValue)
         {
-            Grid neighborsGrid = Grid.createNeighborsGrid(grid, livingValue);
+            GridInt neighborsGrid = GridInt.createNeighborsGrid(grid, livingValue);
 
             for (int i = 0; i < grid.height; ++i)
             {
@@ -76,9 +76,9 @@
             }
         }
 
-        public static void nextConwayGeneration(Grid grid, ConwayRule rule, int livingValue, int deadValue)
+        public static void nextConwayGeneration(GridInt grid, ConwayRule rule, int livingValue, int deadValue)
         {
-            Grid neighborsGrid = Grid.createNeighborsGrid(grid, livingValue);
+            GridInt neighborsGrid = GridInt.createNeighborsGrid(grid, livingValue);
 
             for (int i = 0; i < grid.height; ++i)
             {

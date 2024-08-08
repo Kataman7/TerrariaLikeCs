@@ -19,7 +19,7 @@ namespace TerrariaLikeCs
 
         public virtual void update()
         {
-            // ne fait rien par défaut
+            Console.WriteLine("test");
         }
     }
 }

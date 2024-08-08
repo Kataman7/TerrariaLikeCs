@@ -7,17 +7,17 @@ namespace TerrariaLikeCs
     {
         public Camera2D camera;
         private int speed;
-        public Player player;
-        public bool followPlayer;
+        public Entity target;
+        public bool followTarget;
 
 
-        public Camera(Player player, int speed, float zoom, bool followPlayer)
+        public Camera(Entity target, int speed, float zoom, bool followTarget)
         {
             camera = new Camera2D();
             camera.zoom = zoom;
             this.speed = speed;
-            this.followPlayer = followPlayer;
-            this.player = player;
+            this.followTarget = followTarget;
+            this.target = target;
         }
 
         public void update()
@@ -25,13 +25,13 @@ namespace TerrariaLikeCs
             
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
             {
-                followPlayer = !followPlayer;
+                followTarget = !followTarget;
             }
             
-            if (followPlayer)
+            if (followTarget)
             {
-                camera.target.X = player.hitBox.x - Raylib.GetScreenWidth() / 2;
-                camera.target.Y = player.hitBox.y - Raylib.GetScreenHeight() / 2;
+                camera.target.X = target.hitBox.x - Raylib.GetScreenWidth() / 2;
+                camera.target.Y = target.hitBox.y - Raylib.GetScreenHeight() / 2;
             }
             else
             {
