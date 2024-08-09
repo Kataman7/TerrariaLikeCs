@@ -16,6 +16,8 @@ namespace TerrariaLikeCs
             camera = new Camera(player, 800, 1f, true);
             cursor = new Cursor(world.grid.blockSize, camera);
 
+            world.entities.Add(player);
+
             world.create();
         }
 

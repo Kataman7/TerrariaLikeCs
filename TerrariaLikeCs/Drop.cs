@@ -25,7 +25,7 @@ namespace TerrariaLikeCs
                 {
                     if (stuff == drop.stuff)
                     {
-                        if (Raylib.CheckCollisionCircleRec(new Vector2(entity.hitBox.x + entity.hitBox.width / 2, entity.hitBox.y + entity.hitBox.height / 2), 100, hitBox))
+                        if (Raylib.CheckCollisionCircleRec(new Vector2(entity.hitBox.x + entity.hitBox.width / 2, entity.hitBox.y + entity.hitBox.height / 2), world.grid.blockSize * range, hitBox))
                         {
                             if (quantity >= drop.quantity)
                             {
@@ -38,6 +38,13 @@ namespace TerrariaLikeCs
                                 drop.quantity += quantity;
                             }
                         }
+                    }
+                }
+                else if (entity is Player player)
+                {
+                    if (Raylib.CheckCollisionRecs(player.hitBox, hitBox))
+                    {
+                        alive = false;
                     }
                 }
             }
