@@ -18,7 +18,7 @@ namespace TerrariaLikeCs
                 hoverEvent();
                 if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT))
                 {
-                    hoverEvent();
+                    clicEvent();
                 }
             }
             else

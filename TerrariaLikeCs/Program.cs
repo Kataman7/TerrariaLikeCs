@@ -8,7 +8,8 @@ namespace TerrariaLikeCs
         {
             Raylib.InitWindow(1280, 720, "TerrariaLike");
 
-            Scene scene = new MainScene();
+            CurrentScene.scene = new MenuScene();
+            Scene scene = CurrentScene.scene;
 
             while (!Raylib.WindowShouldClose())
             {
