@@ -11,19 +11,22 @@ namespace TerrariaLikeCs
 
         public MainScene()
         {
-            world = new World(500, 1000, 20);
-            cursor = new Cursor();
+            world = new World(200, 300, 40);
             player = new Player(0, -30, world);
             camera = new Camera(player, 800, 1f, true);
+            cursor = new Cursor(world.grid.blockSize, camera);
+            Raylib.SetTargetFPS(10000);
+            world.entities.Add(player);
 
             world.create();
         }
 
         public void update()
         {
-            player.update();
+            player.update(camera, cursor);
             cursor.update();
             camera.update();
+            world.update();
         }
 
         public void draw()
@@ -33,7 +36,8 @@ namespace TerrariaLikeCs
             Raylib.BeginMode2D(camera.camera);
 
             player.draw();
-            world.grid.drawInfiniteMode(camera.camera);
+            world.draw(camera);
+            //world.grid.draw();
 
             Raylib.EndMode2D();
             Raylib.DrawFPS(10, 10);

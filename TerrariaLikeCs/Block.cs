@@ -11,6 +11,7 @@ namespace TerrariaLikeCs
         public static Block STONE = new Block(1, Raylib.LoadTexture("resources/textures/stone.png"), States.SOLID);
         public static Block DIRT = new Block(2, Raylib.LoadTexture("resources/textures/dirt.png"), States.SOLID);
         public static Block DIRT_GRASS = new Block(3, Raylib.LoadTexture("resources/textures/dirt_grass.png"), States.SOLID);
+        public static Block CURSOR = new Block(4, Raylib.LoadTexture("resources/textures/cursor.png"), States.VOID);
 
         public static Block[] list = new Block[10];
 
@@ -19,6 +20,7 @@ namespace TerrariaLikeCs
             list[STONE.id] = STONE;
             list[DIRT.id] = DIRT;
             list[DIRT_GRASS.id] = DIRT_GRASS;
+            list[CURSOR.id] = CURSOR;
         }
 
         public static void unloadTexture()
@@ -61,6 +63,12 @@ namespace TerrariaLikeCs
             Rectangle sourceRec = new Rectangle(0, 0, texture.width, texture.height);
             Vector2 origin = new Vector2(0, 0);
             Raylib.DrawTexturePro(texture, sourceRec, destRec, origin, 0, Raylib.WHITE);
+        }
+
+        public void destroy(int x, int y, World world, Camera camera)
+        {
+            world.grid.setCell(x, y, 0);
+            world.entities.Add(new Drop((int)x*world.grid.blockSize + world.grid.blockSize / 4, (int)y*world.grid.blockSize + world.grid.blockSize / 4, this, world));
         }
     }
 }

@@ -8,12 +8,12 @@ namespace TerrariaLikeCs
         {
             Raylib.InitWindow(1280, 720, "TerrariaLike");
 
-            Scene scene = new MainScene();
+            CurrentScene.scene = new MenuScene();
 
             while (!Raylib.WindowShouldClose())
             {
-                scene.update();
-                scene.draw();
+                CurrentScene.scene.update();
+                CurrentScene.scene.draw();
             }
             Raylib.CloseWindow();
             Blocks.unloadTexture();
