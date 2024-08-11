@@ -15,7 +15,7 @@ namespace TerrariaLikeCs
             player = new Player(0, -30, world);
             camera = new Camera(player, 800, 1f, true);
             cursor = new Cursor(world.grid.blockSize, camera);
-
+            Raylib.SetTargetFPS(10000);
             world.entities.Add(player);
 
             world.create();
