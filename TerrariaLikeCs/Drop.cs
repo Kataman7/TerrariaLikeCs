@@ -7,12 +7,11 @@ namespace TerrariaLikeCs
     {
         public int quantity;
         public Block stuff;
-        private static int count;
+
         public Drop(int x, int y, Block stuff, World world) : base(x, y, 0.5f, 0.5f, 3, 1000, world)
         {
             this.quantity = 1;
             this.stuff = stuff;
-            count += 1;
         }
 
         public override void update()
@@ -44,7 +43,10 @@ namespace TerrariaLikeCs
                 {
                     if (Raylib.CheckCollisionRecs(player.hitBox, hitBox))
                     {
-                        alive = false;
+                        if (player.inventory.addItem(new Item(this), quantity))
+                        {
+                            alive = false;
+                        }
                     }
                 }
             }
@@ -56,6 +58,5 @@ namespace TerrariaLikeCs
             Rectangle sourceRec = new Rectangle(0, 0, stuff.texture.width, stuff.texture.height);
             Raylib.DrawTexturePro(stuff.texture, sourceRec, hitBox, new Vector2(0, 0), 0, Raylib.WHITE);
         }
-
     }
 }

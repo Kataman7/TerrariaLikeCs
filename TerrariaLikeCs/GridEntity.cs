@@ -33,45 +33,6 @@ namespace TerrariaLikeCs
             list[y * width + x] = value;
         }
 
-        public int countNeighbor(T neighbor, int x, int y)
-        {
-            int count = 0;
-
-            for (int i = -1; i < 2; i++)
-            {
-                for (int j = -1; j < 2; j++)
-                {
-                    if (!(i == 0 && j == 0))
-                    {
-                        int neighborX = x + i;
-                        int neighborY = y + j;
-
-                        if (getCell(neighborX, neighborY).Equals(neighbor))
-                        {
-                            count++;
-                        }
-                    }
-                }
-            }
-
-            return count;
-        }
-
-        public GridInt createNeighborsGrid(GridEntity<T> grid, T neighbor)
-        {
-            GridInt neighborsGrid = new GridInt(grid.width, grid.height, grid.blockSize);
-
-            for (int i = 0; i < grid.height; i++)
-            {
-                for (int j = 0; j < grid.width; j++)
-                {
-                    neighborsGrid.setCell(j, i, grid.countNeighbor(neighbor, j, i));
-                }
-            }
-
-            return neighborsGrid;
-        }
-
         public void draw()
         {
             for (int i = 0; i < height; i++)
@@ -86,30 +47,5 @@ namespace TerrariaLikeCs
                 }
             }
         }
-
-        public void drawInfiniteMode(Camera2D camera)
-        {
-            int halfScreenW = Raylib.GetScreenWidth() / 2;
-            int halfScreenH = Raylib.GetScreenHeight() / 2;
-
-            int width = halfScreenW / blockSize + 2;
-            int height = halfScreenH / blockSize + 2;
-
-            float blockX = (camera.target.X + halfScreenW) / blockSize;
-            float blockY = (camera.target.Y + halfScreenH) / blockSize;
-
-            for (int i = (int)blockY - height; i < blockY + height; ++i)
-            {
-                for (int j = (int)blockX - width; j < blockX + width; ++j)
-                {
-                    T cell = getCell(j, i);
-                    if (cell != null)
-                    {
-                        cell.draw();
-                    }
-                }
-            }
-        }
-
     }
 }

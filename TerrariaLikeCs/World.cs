@@ -77,7 +77,7 @@ namespace TerrariaLikeCs
                     }
                     else if (j >= altitude[i] + 6)
                     {
-                        Generator.randomCellGeneration(grid, i, j, 0.45f, Blocks.STONE.id, 0, -1);
+                        Generator.randomCellGeneration(grid, i, j, 0.5f, Blocks.STONE.id, 0, -1);
                     }
                 }
             }

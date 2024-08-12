@@ -11,7 +11,7 @@ namespace TerrariaLikeCs
 
         public MainScene()
         {
-            world = new World(200, 300, 40);
+            world = new World(300, 500, 20);
             player = new Player(0, -30, world);
             camera = new Camera(player, 800, 1f, true);
             cursor = new Cursor(world.grid.blockSize, camera);
@@ -42,6 +42,7 @@ namespace TerrariaLikeCs
             Raylib.EndMode2D();
             Raylib.DrawFPS(10, 10);
             cursor.draw();
+            player.inventory.draw();
             Raylib.EndDrawing();
         }
     }

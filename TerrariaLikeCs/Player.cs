@@ -10,6 +10,7 @@ namespace TerrariaLikeCs
         private int jumpPower;
         private int jumpMax;
         private int speed;
+        public Inventory inventory { get; }
 
         public Player(int x, int y, World world) : base(x, y, 0.98f, 1.98f, 10, 1000, world)
         {
@@ -17,6 +18,7 @@ namespace TerrariaLikeCs
             jumpPower = 600;
             jumpMax = 3;
             speed = 300;
+            inventory = new Inventory(5, 5);
         }
         private void moove(int direction)
         {
@@ -55,7 +57,7 @@ namespace TerrariaLikeCs
 
                 if (blockID != 0)
                 {
-                    Blocks.list[blockID].destroy(posX, posY, world, cam);
+                    Blocks.list[blockID].destroy(posX, posY, world, cam); 
                 }
             }
         }

@@ -8,20 +8,12 @@ namespace TerrariaLikeCs
 {
     public static class Blocks
     {
+        public static Block[] list = new Block[10];
+
         public static Block STONE = new Block(1, Raylib.LoadTexture("resources/textures/stone.png"), States.SOLID);
         public static Block DIRT = new Block(2, Raylib.LoadTexture("resources/textures/dirt.png"), States.SOLID);
         public static Block DIRT_GRASS = new Block(3, Raylib.LoadTexture("resources/textures/dirt_grass.png"), States.SOLID);
         public static Block CURSOR = new Block(4, Raylib.LoadTexture("resources/textures/cursor.png"), States.VOID);
-
-        public static Block[] list = new Block[10];
-
-        static Blocks()
-        {
-            list[STONE.id] = STONE;
-            list[DIRT.id] = DIRT;
-            list[DIRT_GRASS.id] = DIRT_GRASS;
-            list[CURSOR.id] = CURSOR;
-        }
 
         public static void unloadTexture()
         {
@@ -31,7 +23,6 @@ namespace TerrariaLikeCs
                 {
                     Raylib.UnloadTexture(block.texture);
                 }
-
             }
         }
 
@@ -55,6 +46,8 @@ namespace TerrariaLikeCs
             this.id = id;
             this.texture = texture;
             this.state = state;
+
+            Blocks.list[id] = this;
         }
 
         public void draw(int x, int y, int size)
