@@ -11,7 +11,7 @@ namespace TerrariaLikeCs
 
         public MainScene()
         {
-            world = new World(300, 500, 20);
+            world = new World(300, 500, 35);
             player = new Player(0, -30, world);
             camera = new Camera(player, 800, 1f, true);
             cursor = new Cursor(world.grid.blockSize, camera);

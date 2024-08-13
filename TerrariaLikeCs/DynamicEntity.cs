@@ -1,10 +1,10 @@
 ﻿using Raylib_CsLo;
-using System.Numerics;
 
 namespace TerrariaLikeCs
 {
     public class DynamicEntity : Entity
     {
+        protected float velX;
         protected float velY;
         protected int range;
         protected float weight;
@@ -13,6 +13,7 @@ namespace TerrariaLikeCs
 
         public DynamicEntity(int x, int y, float width, float height, int range, float weight, World world) : base (x, y, width, height, world.grid.blockSize)
         {
+            velX = 0;
             velY = 0;
             this.range = range;
             this.weight = weight;
@@ -27,6 +28,7 @@ namespace TerrariaLikeCs
 
             velY += weight * Raylib.GetFrameTime();
             hitBox.y += velY * Raylib.GetFrameTime();
+            hitBox.x += velX * Raylib.GetFrameTime();
 
             if (checkStateCollision() == States.SOLID)
             {
@@ -36,9 +38,17 @@ namespace TerrariaLikeCs
 
             if (checkStateCollision() == States.SOLID)
             {
+                velX = 0;
                 hitBox.x = previousX;
             }
-            
+
+            float friction = 0.95f;
+            velX *= friction;
+
+            if (Math.Abs(velX) < 0.01f)
+            {
+                velX = 0;
+            }
         }
 
         public States checkStateCollision()
