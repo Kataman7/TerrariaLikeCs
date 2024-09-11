@@ -29,7 +29,6 @@ namespace TerrariaLikeCs
             return list[y * width + x];
         }
 
-
         public void setCell(int x, int y, int value)
         {
             x = ((x % width) + width) % width;
